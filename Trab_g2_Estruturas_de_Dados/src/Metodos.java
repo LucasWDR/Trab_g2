@@ -34,7 +34,7 @@ public class Metodos {
         System.out.println("Nota da G2:"+ sc.g2);
         System.out.println("Media Final:"+ sc.media_final);
     }
-    public void adc_Inicio(Lista list){
+    public void adc_esquerda(Lista list){
         Aluno novo_Aluno;
         Aluno aux;
         char resp;
@@ -61,7 +61,7 @@ public class Metodos {
             resp=tc.next().toUpperCase().charAt(0);
         }while ((resp=='S') || (resp=='s'));
     }
-    public void adc_Final(Lista list){
+    public void adc_direita(Lista list){
         Aluno novo_Cont;
         Aluno aux;
         char resp;
@@ -136,6 +136,128 @@ public class Metodos {
         String nome;
 
         System.out.println("Consulte por nome");
+        System.out.println("Nome:");
+        nome= tc.next();
+
+        aux=lista.primeiro;
+        while(aux != null){
+            if(nome.toUpperCase().equals(aux.nome.toUpperCase())){
+                imprimir(aux);
+                System.out.println("Média das notas:"+aux.media_final);
+                break;
+            }
+            else{
+                aux= aux.bj;
+                if(aux.bj ==null){
+                    System.out.println("Aluno não encontrado!!");
+                }
+            }
+        }
     }
+    public void ExcluiDireita(Lista lista){
+
+        System.out.println("Exclui do fim");
+
+        Aluno aux = lista.primeiro;
+        Aluno remover =lista.ultimo;
+
+        if(lista.quant==0){
+            System.out.println("Lista vazia!");
+        }
+        else if(lista.quant==1){
+            lista.primeiro=null;
+            lista.ultimo=null;
+            lista.quant--;
+        }
+
+        while(aux.bj !=lista.ultimo){
+            if(aux.bj== remover){
+            aux.bj=null;
+            lista.quant--;
+            lista.ultimo=aux;
+                System.out.println("Aluno removido com Sucesso!!");
+
+            }else{
+                aux=aux.bj;
+            }
+        }
+
+    }
+    public void Excluir_Esquerda(Lista lista){
+
+        Aluno aux;
+
+        aux=lista.primeiro;
+        lista.primeiro=aux.bj;
+        lista.quant--;
+    }
+    public void Excluir_por_codigo(Lista lista){
+
+        Aluno aux;
+        int codigo;
+        System.out.println("Excluir por codigo");
+        codigo=Utils.valid_num("Código:");
+
+        aux=lista.primeiro;
+        if(codigo==aux.cod){
+            lista.primeiro=aux.bj;
+            lista.quant--;
+            System.out.println("Aluno excluido com sucesso!!");
+        }
+        else{
+            while(aux.bj != null){
+                if(codigo== aux.bj.cod){
+                    Aluno aux1=aux.bj;
+                    lista.quant--;
+                    if(aux.bj==null){
+                        lista.ultimo=aux;
+                    }
+                    System.out.println("Aluno excluido!!");
+                    break;
+                }else{
+                    aux=aux.bj;
+                    if (aux.bj==null){
+                        System.out.println("Aluno não econtrado");
+                    }
+                }
+            }
+        }
+    }
+
+    public void listar_Registro(Lista lista){
+
+        Aluno correrLista=lista.primeiro;
+        System.out.println("Quantidade de Regisitros" + lista.quant);
+
+        if(correrLista.bj== null){
+            imprimir(correrLista);
+        }
+        else{
+            while(correrLista !=null){
+                imprimir(correrLista);
+                correrLista=correrLista.bj;
+            }
+        }
+
+    }
+
+    public void listar_mediasfinais(Lista lista){
+        Aluno correrLista=lista.primeiro;
+
+        if (correrLista.bj==null){
+            imprimir(correrLista);
+            System.out.println("Medias dos Alunos:"+ correrLista.media_final);
+        }
+        else{
+            while (correrLista!= null){
+                imprimir(correrLista);
+                System.out.println("Medias dos Alunos:"+correrLista);
+                System.out.println("\n");
+                correrLista=correrLista.bj;
+            }
+        }
+    }
+
+
 
 }

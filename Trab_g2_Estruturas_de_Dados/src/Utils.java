@@ -12,9 +12,9 @@ public class Utils {
             try{
                 num= Integer.parseInt(tc.next());
                 return (num);
-            }catch(NumeroFormatExpection e){
+            }catch(NumberFormatException e){
                 System.out.println("Digite apenas numeros!!");
-                valida=false
+                valida=false;
             }
         }
         return (num);
@@ -47,7 +47,7 @@ public class Utils {
             email=tc.next();
             valid=email.matches(".*@.*");
             if(valid){
-                return;(email);
+                return (email);
             }
             else{
                 System.out.println("o Email esta incorreto !!");
@@ -55,6 +55,6 @@ public class Utils {
             }
         }while(valid==false);
 
-        return; null;
+        return null;
     }
 }
